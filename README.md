@@ -61,8 +61,12 @@ OpenAPI documentation is available via `http://localhost:6061/docs/`
 A cron job is scheduled to run every minute. This job primarily persists air quality data and timestamp which can in turn be queried at any future time.
 
 ### Tests
-The api provisions automated tests to test the service, request client and anticipated edge cases. You can run tests via:
+The api provisions automated tests to test the service, request client and anticipated edge cases. You can run all tests via:
 
+```bash
+npm test
+```
+Alternatively, you can run and watch all tests via:
 ```bash
 npm run test:watch
 ```
