@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: air-quality-project
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "6061:6061"
+    environment:
+      - NODE_ENV=development
+      - IQAIR_API_KEY=${IQAIR_API_KEY}
+      - USE_DOCKER=true
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm run start:dev
+    depends_on:
+      - mongo
+    networks:
+      - app-network
+
+  mongo:
+    container_name: mongo
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - data:/data/db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  data:
